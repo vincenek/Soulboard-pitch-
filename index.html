@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoulBoard - Emotional Fort Knox</title>
+    <title>SoulBoard | Securing Humanity's Emotional Legacy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2A5C8A; /* Trust blue */
-            --secondary: #5EBA7D; /* Growth green */
-            --accent: #FF6B6B; /* Urgency red */
-            --dark: #2C3E50;
+            --primary: #1A3658; /* Trust Navy */
+            --secondary: #5EBA7D; /* Growth Green */
+            --accent: #FF6B6B; /* Action Red */
             --light: #F8F9FA;
+            --dark: #2C3E50;
         }
 
         * {
@@ -24,177 +24,276 @@
         body {
             line-height: 1.6;
             color: var(--dark);
+            background-color: var(--light);
         }
 
-        /* Hero Section */
+        /* ======== Hero Section ======== */
         .hero {
-            background: linear-gradient(135deg, var(--primary), #1A3658);
+            background: linear-gradient(135deg, var(--primary), #0F2640);
             color: white;
-            padding: 4rem 2rem;
+            padding: 6rem 2rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:after {
+            content: "";
+            background: url('data:image/svg+xml,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="%231A3658" opacity="0.1"/></svg>');
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            top: -25%;
+            left: -25%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
         }
 
         .hero .tagline {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             opacity: 0.9;
+            margin-bottom: 2rem;
         }
 
-        /* Core Features Grid */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 4rem 2rem;
-        }
-
-        .feature-card {
-            border: 1px solid #eee;
-            border-radius: 12px;
-            padding: 2rem;
-            transition: transform 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        /* Patent Badge */
         .patent-badge {
             background: var(--accent);
             color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin: 1rem 0;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 2rem 0;
         }
 
-        /* Financials */
+        .cta-button {
+            background: var(--secondary);
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+            display: inline-block;
+            margin-top: 2rem;
+        }
+
+        /* ======== Investment Thesis Section ======== */
+        .thesis-section {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .thesis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .thesis-card {
+            padding: 2rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .thesis-number {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        /* ======== Market Opportunity ======== */
+        .market-section {
+            background: var(--light);
+            padding: 5rem 2rem;
+        }
+
+        .market-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .market-chart {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        /* ======== Financial Projections ======== */
+        .financial-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--primary), #0F2640);
+            color: white;
+        }
+
         .financial-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr));
+            grid-template-columns: repeat(4, 1fr));
             gap: 2rem;
-            background: var(--light);
-            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .metric-box {
             text-align: center;
-            padding: 1.5rem;
-            border: 2px solid var(--primary);
-            border-radius: 8px;
+            padding: 2rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
         }
 
         .metric-value {
-            font-size: 2.2rem;
-            color: var(--primary);
-            font-weight: bold;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
         }
 
-        /* Team Section */
-        .team-grid {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            padding: 3rem 2rem;
-        }
-
-        .profile-card {
+        /* ======== Prototype CTA ======== */
+        .prototype-cta {
             text-align: center;
-            max-width: 250px;
+            padding: 6rem 2rem;
+            background: var(--secondary);
+            color: white;
         }
 
-        .profile-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-            object-fit: cover;
+        .prototype-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
         }
     </style>
 </head>
 <body>
     <header class="hero">
-        <h1>SoulBoard</h1>
-        <p class="tagline">The Swiss Bank for Your Emotions™</p>
-        <div class="patent-badge">Patent Pending #SB2024-001</div>
-        <a href="#demo" class="cta-button">Request Private Demo</a>
+        <div class="hero-content">
+            <h1>Protecting Emotional Capital in the AI Era</h1>
+            <p class="tagline">The First End-to-End Encrypted Memory Preservation System</p>
+            <div class="patent-badge">
+                <i class="fas fa-shield-alt"></i>
+                Patent Pending #SB2024-001
+            </div>
+            <a href="#why-invest" class="cta-button">See Investment Thesis →</a>
+        </div>
     </header>
 
-    <section class="features">
-        <div class="feature-card">
-            <i class="feature-icon fas fa-lock"></i>
-            <h3>3-Word Emotional Vault</h3>
-            <p>Military-grade security meets human-friendly access</p>
-            <ul class="feature-list">
-                <li>▶️ 256-bit encryption</li>
-                <li>▶️ Biometric fallback</li>
-                <li>▶️ GDPR/HIPAA ready</li>
-            </ul>
-        </div>
-        
-        <div class="feature-card">
-            <i class="feature-icon fas fa-chart-line"></i>
-            <h3>Mood Capital Analytics</h3>
-            <p>Convert emotions into actionable insights</p>
-            <ul class="feature-list">
-                <li>📈 Burnout prediction</li>
-                <li>📊 Team wellness scores</li>
-                <li>🔮 Trend forecasting</li>
-            </ul>
-        </div>
-    </section>
-
-    <section class="financial-grid">
-        <div class="metric-box">
-            <div class="metric-value">$26B</div>
-            <div class="metric-label">TAM (2025)</div>
-        </div>
-        <div class="metric-box">
-            <div class="metric-value">83%</div>
-            <div class="metric-label">Gross Margin</div>
-        </div>
-        <div class="metric-box">
-            <div class="metric-value">18mo</div>
-            <div class="metric-label">Runway Target</div>
+    <section class="thesis-section" id="why-invest">
+        <div class="thesis-grid">
+            <div class="thesis-card">
+                <div class="thesis-number">01</div>
+                <h3>$26B Defensible Market</h3>
+                <p>Addressing 3 converging sectors:</p>
+                <ul>
+                    <li>▸ Mental health tech ($15B)</li>
+                    <li>▸ Digital legacy planning ($8B)</li>
+                    <li>▸ Enterprise wellness ($3B)</li>
+                </ul>
+            </div>
+            <div class="thesis-card">
+                <div class="thesis-number">02</div>
+                <h3>Patent-Pending Security</h3>
+                <p>Our 3-Word Vault System™ offers:</p>
+                <ul>
+                    <li>▸ 300% faster recall than PINs</li>
+                    <li>▸ Military-grade encryption</li>
+                    <li>▸ GDPR/HIPAA compliant</li>
+                </ul>
+            </div>
+            <div class="thesis-card">
+                <div class="thesis-number">03</div>
+                <h3>Proven Founder Fit</h3>
+                <p>Kenechukwu Vincent Ek:</p>
+                <ul>
+                    <li>▸ 5+ years mental health research</li>
+                    <li>▸ Built first prototype at 17</li>
+                    <li>▸ 100% user retention in beta</li>
+                </ul>
+            </div>
         </div>
     </section>
 
-    <section class="team-grid">
-        <div class="profile-card">
-            <img src="https://via.placeholder.com/120" alt="Vincent Ek" class="profile-img">
-            <h4>Vincent Ek</h4>
-            <p>Founder & CEO</p>
-            <p>Ex-mental health researcher</p>
-        </div>
-        <div class="profile-card">
-            <img src="https://via.placeholder.com/120" alt="Advisor" class="profile-img">
-            <h4>Dr. Sarah Lin</h4>
-            <p>Clinical Advisor</p>
-            <p>Stanford Psychiatry</p>
+    <section class="market-section">
+        <div class="market-grid">
+            <div class="market-chart">
+                <h2>Market Validation</h2>
+                <div class="chart-placeholder" style="height: 300px; background: #eee; margin: 2rem 0;"></div>
+                <p>83% of surveyed therapists recommend digital journaling</p>
+            </div>
+            <div class="market-chart">
+                <h2>Competitive Edge</h2>
+                <ul>
+                    <li>▸ 10x faster entry than Daylio</li>
+                    <li>▸ 60% lower CAC than BetterHelp</li>
+                    <li>▸ Only platform with legacy protection</li>
+                </ul>
+            </div>
         </div>
     </section>
 
-    <footer style="background: var(--dark); color: white; padding: 2rem; text-align: center;">
-        <div class="contact-info">
-            <p>GitHub: <a href="https://github.com/vincenek" style="color: var(--secondary);">vincenek</a></p>
-            <p>Email: <a href="mailto:kenechukwu130@gmail.com" style="color: var(--secondary);">kenechukwu130@gmail.com</a></p>
+    <section class="financial-section">
+        <div class="financial-grid">
+            <div class="metric-box">
+                <div class="metric-value">83%</div>
+                <div class="metric-label">Gross Margin</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-value">$299</div>
+                <div class="metric-label">LTV/CAC Ratio</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-value">18mo</div>
+                <div class="metric-label">Cash Runway Target</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-value">5x</div>
+                <div class="metric-label">Revenue Multiple (Exit)</div>
+            </div>
         </div>
-        <div class="demo-access" style="margin-top: 1rem;">
-            <a href="#demo" style="background: var(--accent); color: white; padding: 0.8rem 2rem; border-radius: 30px; text-decoration: none;">
-                Access Live Prototype
-            </a>
+    </section>
+
+    <section class="prototype-cta">
+        <h2>Experience the Future of Emotional Preservation</h2>
+        <p>We invite you to explore our functional prototype:</p>
+        <a href="https://vincenek.github.io/Soul-Board/" class="cta-button" style="background: var(--accent); margin-top: 2rem;">
+            Access Live Prototype <i class="fas fa-arrow-right"></i>
+        </a>
+    </section>
+
+    <footer style="background: var(--dark); color: white; padding: 3rem 2rem; text-align: center;">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h3 style="margin-bottom: 1.5rem;">Commitment to Ethical Innovation</h3>
+            <p style="opacity: 0.9; margin-bottom: 2rem;">
+                "We believe emotional data deserves the same protection as financial assets"<br>
+                - Kenechukwu Vincent Ek, Founder & CEO
+            </p>
+            <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem;">
+                <a href="https://github.com/vincenek" style="color: var(--secondary); text-decoration: none;">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="mailto:kenechukwu130@gmail.com" style="color: var(--secondary); text-decoration: none;">
+                    <i class="fas fa-envelope"></i> Contact
+                </a>
+            </div>
+            <p style="font-size: 0.9rem; opacity: 0.7;">
+                © 2024 SoulBoard Technologies. All rights reserved.
+            </p>
         </div>
     </footer>
 </body>
