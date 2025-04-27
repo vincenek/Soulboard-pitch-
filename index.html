@@ -3,183 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoulBoard - Future Vision</title>
+    <title>SoulBoard - Digital Sanctuary</title>
     <style>
-        /* Existing styles remain */
+        :root {
+            --primary: #2A5C82;    /* Professional blue */
+            --secondary: #3AAFA9;  /* Teal accent */
+            --accent: #FF6B6B;     /* Soft red */
+            --background: #F8F9FA;  /* Light background */
+            --text: #2B2D42;       /* Dark text */
+            --card-bg: #FFFFFF;    /* Pure white cards */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: var(--background);
+            transform: skewY(-3deg);
+        }
+
+        .logo {
+            width: 120px;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        /* Feature Grid */
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin: 2rem 0;
+            margin: 4rem 0;
         }
 
         .feature-card {
-            background: white;
-            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Mockup Elements */
+        .mockup {
+            background: var(--background);
             border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .mockup-container {
+            padding: 1.5rem;
+            margin: 1.5rem 0;
             position: relative;
-            min-height: 200px;
-            margin: 1rem 0;
         }
 
+        .vault-interface {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .vault-input {
+            padding: 1rem;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        /* News Slider */
         .news-slider {
             display: flex;
-            overflow-x: auto;
-            gap: 1rem;
+            gap: 1.5rem;
             padding: 1rem 0;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
         }
 
         .news-card {
-            flex: 0 0 80%;
-            background: #f8f9fa;
-            padding: 1rem;
+            flex: 0 0 85%;
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            scroll-snap-align: start;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        /* Technical Specs */
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .spec-item {
+            padding: 1.5rem;
+            background: rgba(42, 92, 130, 0.05);
             border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        /* Roadmap */
+        .roadmap {
+            display: grid;
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .roadmap-phase {
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .roadmap-phase::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeIn 0.6s ease forwards;
         }
     </style>
 </head>
 <body>
-    <!-- Existing Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <img src="logo.svg" alt="SoulBoard" class="logo">
+            <h1>Your Private Digital Sanctuary</h1>
+            <p>Journaling reimagined for the modern mind</p>
+        </div>
+    </section>
 
-    <div class="container">
-        <!-- Memory Vault System -->
-        <div class="feature-card">
-            <h2>Military-Grade Memory Vault</h2>
-            <div class="mockup-container">
-                <div class="vault-interface">
-                    <input type="text" placeholder="Enter 3-word passkey" 
-                           pattern="\w{3,20}-\w{3,20}-\w{3,20}">
-                    <div class="vault-sections">
-                        <div class="vault-tab active">Hidden Messages</div>
-                        <div class="vault-tab">Removed Messages (60d)</div>
+    <main class="container">
+        <!-- Core Features -->
+        <section class="feature-grid">
+            <div class="feature-card animate">
+                <h2>🛡️ Military-Grade Vault</h2>
+                <div class="mockup">
+                    <div class="vault-interface">
+                        <input type="text" class="vault-input" 
+                               placeholder="sunshine-moonlight-serendipity"
+                               pattern="\w{3,20}-\w{3,20}-\w{3,20}">
+                        <div class="spec-grid">
+                            <div class="spec-item">
+                                <h4>3-Word Encryption</h4>
+                                <p>Patent-pending security system</p>
+                            </div>
+                            <div class="spec-item">
+                                <h4>Auto-Archival</h4>
+                                <p>60-day ephemeral storage</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <p>Bank-level security meets emotional preservation</p>
-        </div>
 
-        <!-- AI Integration -->
-        <div class="feature-card">
-            <h2>Smart AI Companion</h2>
-            <div class="mockup-container">
-                <div class="ai-toggle">
-                    <label>GPT Assistance</label>
-                    <div class="toggle-switch"></div>
-                </div>
-                <div class="ai-reminder">
-                    <p>"You mentioned car maintenance - set a reminder?"</p>
-                    <div class="reminder-options">
-                        <button>Add to Calendar</button>
-                        <button>Snooze</button>
+            <div class="feature-card animate" style="animation-delay: 0.2s">
+                <h2>🤖 AI Companion</h2>
+                <div class="mockup">
+                    <div class="ai-toggle">
+                        <label>Enable GPT Insights</label>
+                        <div class="toggle-switch"></div>
+                    </div>
+                    <div class="spec-grid">
+                        <div class="spec-item">
+                            <h4>Smart Reminders</h4>
+                            <p>Context-aware notifications</p>
+                        </div>
+                        <div class="spec-item">
+                            <h4>Pattern Analysis</h4>
+                            <p>Mood trend detection</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <p>Context-aware support that respects your privacy</p>
-        </div>
+        </section>
 
-        <!-- Cross-Platform Ecosystem -->
-        <div class="feature-grid">
-            <div class="feature-card">
-                <h3>📱 Device Sync</h3>
-                <div class="cloud-logos">
-                    <img src="icloud.svg" alt="iCloud">
-                    <img src="gmail.svg" alt="Gmail">
+        <!-- Ecosystem Integration -->
+        <section class="feature-card animate" style="animation-delay: 0.4s">
+            <h2>🔗 Seamless Ecosystem</h2>
+            <div class="mockup">
+                <div class="spec-grid">
+                    <div class="spec-item">
+                        <h4>📱 Device Sync</h4>
+                        <p>iCloud & Google integration</p>
+                        <div class="cloud-logos">
+                            <!-- Add SVG logos here -->
+                        </div>
+                    </div>
+                    <div class="spec-item">
+                        <h4>📸 Visual Journaling</h4>
+                        <p>Image & text integration</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>📤 Instant Sharing</h4>
+                        <p>Create beautiful snapshots</p>
+                    </div>
                 </div>
-                <p>Seamless synchronization across all your devices</p>
             </div>
-
-            <div class="feature-card">
-                <h3>📸 Visual Journaling</h3>
-                <div class="image-grid-mockup">
-                    <div class="grid-item"></div>
-                    <div class="grid-item"></div>
-                    <div class="grid-item"></div>
-                </div>
-                <p>Integrate images with your emotional timeline</p>
-            </div>
-        </div>
+        </section>
 
         <!-- News Digest -->
-        <div class="feature-card">
-            <h2>Mindful News Consumption</h2>
+        <section class="feature-card animate" style="animation-delay: 0.6s">
+            <h2>📰 Mindful News Digest</h2>
             <div class="news-slider">
                 <div class="news-card">
-                    <h4>🌍 Climate Update</h4>
-                    <p>Brief summary...</p>
-                    <button>Deep Dive</button>
+                    <h4>Global Climate Update</h4>
+                    <p>Key developments in renewable energy...</p>
+                    <button>Deep Dive →</button>
                 </div>
                 <div class="news-card">
-                    <h4>💼 Business Trends</h4>
-                    <p>Quick insights...</p>
-                    <button>Deep Dive</button>
+                    <h4>Tech Innovations</h4>
+                    <p>Breakthroughs in AI ethics...</p>
+                    <button>Deep Dive →</button>
                 </div>
             </div>
-            <p>Stay informed without overload</p>
-        </div>
+        </section>
 
-        <!-- Widget & Sharing -->
-        <div class="feature-grid">
-            <div class="feature-card">
-                <h3>📤 Instant Sharing</h3>
-                <div class="share-mockup">
-                    <div class="lyric-card">Your text as beautiful image</div>
-                    <div class="share-buttons">
-                        <button>Instagram</button>
-                        <button>Save</button>
-                    </div>
-                </div>
+        <!-- Roadmap -->
+        <section class="roadmap">
+            <h2>Development Roadmap</h2>
+            <div class="roadmap-phase">
+                <h3>2024 Q3</h3>
+                <ul>
+                    <li>Core Vault System Launch</li>
+                    <li>Seed Funding Round</li>
+                    <li>Mobile MVP Release</li>
+                </ul>
             </div>
-
-            <div class="feature-card">
-                <h3>📲 Home Screen Widget</h3>
-                <div class="widget-mockup">
-                    <div class="widget">
-                        <p class="mood">😊 Current Mood</p>
-                        <p class="reminder">⏰ 3 PM Meeting</p>
-                    </div>
-                </div>
+            <div class="roadmap-phase">
+                <h3>2024 Q4</h3>
+                <ul>
+                    <li>AI Companion Beta</li>
+                    <li>Cross-Device Sync</li>
+                    <li>Enterprise Partnerships</li>
+                </ul>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <script>
         // Interactive elements
-        document.querySelectorAll('.vault-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                document.querySelector('.vault-tab.active').classList.remove('active');
-                tab.classList.add('active');
+        document.querySelectorAll('.news-card button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.parentElement.classList.toggle('expanded');
             });
         });
 
-        // News slider controls
-        const slider = document.querySelector('.news-slider');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, { threshold: 0.1 });
 
-        slider.addEventListener('mousedown', (e) => {
-            isDown = true;
-            startX = e.pageX - slider.offsetLeft;
-            scrollLeft = slider.scrollLeft;
-        });
-
-        slider.addEventListener('mouseleave', () => {
-            isDown = false;
-        });
-
-        slider.addEventListener('mouseup', () => {
-            isDown = false;
-        });
-
-        slider.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - slider.offsetLeft;
-            const walk = (x - startX) * 2;
-            slider.scrollLeft = scrollLeft - walk;
+        document.querySelectorAll('.feature-card, .roadmap-phase').forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>
