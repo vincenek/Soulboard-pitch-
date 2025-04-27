@@ -6,12 +6,12 @@
     <title>SoulBoard - Digital Sanctuary</title>
     <style>
         :root {
-            --primary: #2A5C82;    /* Professional blue */
-            --secondary: #3AAFA9;  /* Teal accent */
-            --accent: #FF6B6B;     /* Soft red */
-            --background: #F8F9FA;  /* Light background */
-            --text: #2B2D42;       /* Dark text */
-            --card-bg: #FFFFFF;    /* Pure white cards */
+            --primary: #2A5C82;
+            --secondary: #3AAFA9;
+            --accent: #FF6B6B;
+            --background: #F8F9FA;
+            --text: #2B2D42;
+            --card-bg: #FFFFFF;
         }
 
         * {
@@ -34,7 +34,6 @@
             padding: 2rem 1.5rem;
         }
 
-        /* Hero Section */
         .hero {
             text-align: center;
             padding: 6rem 0;
@@ -61,7 +60,6 @@
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
         }
 
-        /* Feature Grid */
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -81,7 +79,6 @@
             transform: translateY(-5px);
         }
 
-        /* Mockup Elements */
         .mockup {
             background: var(--background);
             border-radius: 12px;
@@ -103,7 +100,6 @@
             text-align: center;
         }
 
-        /* News Slider */
         .news-slider {
             display: flex;
             gap: 1.5rem;
@@ -121,7 +117,6 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
-        /* Technical Specs */
         .spec-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -136,7 +131,6 @@
             border-left: 4px solid var(--primary);
         }
 
-        /* Roadmap */
         .roadmap {
             display: grid;
             gap: 2rem;
@@ -160,7 +154,6 @@
             background: var(--primary);
         }
 
-        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -169,19 +162,44 @@
         .animate {
             animation: fadeIn 0.6s ease forwards;
         }
+
+        .contact-footer {
+            padding: 3rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .contact-items {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .contact-items a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .contact-items a:hover {
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
     <section class="hero">
         <div class="container">
-            <img src="logo.svg" alt="SoulBoard" class="logo">
-            <h1>Your Private Digital Sanctuary</h1>
-            <p>Journaling reimagined for the modern mind</p>
+            <h1>🌥️ SoulBoard</h1>
+            <p>Your Private Digital Sanctuary</p>
         </div>
     </section>
 
     <main class="container">
-        <!-- Core Features -->
         <section class="feature-grid">
             <div class="feature-card animate">
                 <h2>🛡️ Military-Grade Vault</h2>
@@ -225,7 +243,6 @@
             </div>
         </section>
 
-        <!-- Ecosystem Integration -->
         <section class="feature-card animate" style="animation-delay: 0.4s">
             <h2>🔗 Seamless Ecosystem</h2>
             <div class="mockup">
@@ -233,9 +250,6 @@
                     <div class="spec-item">
                         <h4>📱 Device Sync</h4>
                         <p>iCloud & Google integration</p>
-                        <div class="cloud-logos">
-                            <!-- Add SVG logos here -->
-                        </div>
                     </div>
                     <div class="spec-item">
                         <h4>📸 Visual Journaling</h4>
@@ -249,7 +263,6 @@
             </div>
         </section>
 
-        <!-- News Digest -->
         <section class="feature-card animate" style="animation-delay: 0.6s">
             <h2>📰 Mindful News Digest</h2>
             <div class="news-slider">
@@ -266,7 +279,6 @@
             </div>
         </section>
 
-        <!-- Roadmap -->
         <section class="roadmap">
             <h2>Development Roadmap</h2>
             <div class="roadmap-phase">
@@ -288,15 +300,28 @@
         </section>
     </main>
 
+    <footer class="contact-footer">
+        <h3>🌥️ Connect With Us</h3>
+        <div class="contact-items">
+            <div>
+                📧 <a href="mailto:kenechulwu130@gmail.com">kenechulwu130@gmail.com</a>
+            </div>
+            <div>
+                📱 <a href="https://wa.me/+2349153073571">+234 915 307 3571</a>
+            </div>
+            <div>
+                💻 <a href="https://github.com/Vincenek">GitHub/Vincenek</a>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // Interactive elements
         document.querySelectorAll('.news-card button').forEach(btn => {
             btn.addEventListener('click', () => {
                 btn.parentElement.classList.toggle('expanded');
             });
         });
 
-        // Intersection Observer for animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
