@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoulBoard Vision</title>
+    <style>
+        :root {
+            --primary: #5E81AC;
+            --secondary: #88C0D0;
+            --background: #ECEFF4;
+            --text: #2E3440;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .logo {
+            width: 100px;
+            margin-bottom: 1rem;
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .feature-mockup {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            min-height: 300px;
+        }
+
+        /* Technical Specs */
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .spec-item {
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+        }
+
+        /* Interactive Elements */
+        .vault-demo {
+            border: 2px dashed var(--primary);
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .vault-demo:hover {
+            background: rgba(94, 129, 172, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <svg class="logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="45" fill="none" stroke="white" stroke-width="3"/>
+                <path d="M30,40 Q50,20 70,40 L50,80 Z" fill="white"/>
+            </svg>
+            <h1>The Future of Private Self-Care</h1>
+            <p>Journaling reimagined for the AI era</p>
+        </div>
+    </section>
+
+    <!-- Core Features -->
+    <div class="container">
+        <!-- Memory Vault -->
+        <div class="feature-card">
+            <h2>Military-Grade Memory Vault</h2>
+            <div class="feature-mockup">
+                <div class="vault-demo" onclick="demoVault()">
+                    <p>🔒 Try 3-Word Encryption</p>
+                    <div id="vaultOutput"></div>
+                </div>
+            </div>
+            <div class="spec-grid">
+                <div class="spec-item">
+                    <h3>3WP™ Encryption</h3>
+                    <p>Patented 3-word phrase security</p>
+                </div>
+                <div class="spec-item">
+                    <h3>Ephemeral Storage</h3>
+                    <p>Auto-archive after 60 days</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Companion -->
+        <div class="feature-card">
+            <h2>Context-Aware AI Companion</h2>
+            <div class="feature-mockup">
+                <div id="aiChat">
+                    <div class="message">User: Feeling overwhelmed</div>
+                    <div class="message">AI: Let's break this down...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Specs -->
+        <div class="feature-card">
+            <h2>Technical Architecture</h2>
+            <div class="spec-grid">
+                <div class="spec-item">
+                    <h3>Local-First Design</h3>
+                    <p>Device-native storage</p>
+                </div>
+                <div class="spec-item">
+                    <h3>Hybrid AI</h3>
+                    <p>70% on-device processing</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Roadmap -->
+        <div class="feature-card">
+            <h2>Development Roadmap</h2>
+            <div class="spec-grid">
+                <div class="spec-item">
+                    <h3>2024 Q3</h3>
+                    <ul>
+                        <li>Core Vault MVP</li>
+                        <li>Seed Round</li>
+                    </ul>
+                </div>
+                <div class="spec-item">
+                    <h3>2025 Q1</h3>
+                    <ul>
+                        <li>AI Companion Beta</li>
+                        <li>Series A Target</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Interactive Vault Demo
+        async function demoVault() {
+            const sampleText = "SoulBoard protects this message";
+            try {
+                const encrypted = await window.crypto.subtle.digest(
+                    'SHA-256',
+                    new TextEncoder().encode(sampleText)
+                );
+                const hashArray = Array.from(new Uint8Array(encrypted));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+                document.getElementById('vaultOutput').innerHTML = 
+                    `<small>Encrypted:<br>${hashHex.substring(0,24)}...</small>`;
+            } catch (e) {
+                alert('Security demo requires HTTPS');
+            }
+        }
+
+        // Dynamic Roadmap
+        const roadmap = [
+            { date: '2024 Q3', items: ['Core Vault MVP', 'Seed Round'] },
+            { date: '2025 Q1', items: ['AI Companion Beta', 'Series A'] }
+        ];
+    </script>
+</body>
+</html>
