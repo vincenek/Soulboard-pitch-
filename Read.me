@@ -3,199 +3,311 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoulBoard Vision</title>
+    <title>SoulBoard - Digital Sanctuary</title>
     <style>
         :root {
-            --primary: #5E81AC;
-            --secondary: #88C0D0;
-            --background: #ECEFF4;
-            --text: #2E3440;
+            --primary: #2A5C82;    /* Professional blue */
+            --secondary: #3AAFA9;  /* Teal accent */
+            --accent: #FF6B6B;     /* Soft red */
+            --background: #F8F9FA;  /* Light background */
+            --text: #2B2D42;       /* Dark text */
+            --card-bg: #FFFFFF;    /* Pure white cards */
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         body {
-            background: var(--background);
+            background-color: var(--background);
             color: var(--text);
             line-height: 1.6;
+            font-size: 1.05rem;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2rem 1.5rem;
         }
 
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 4rem 0;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: var(--background);
+            transform: skewY(-3deg);
         }
 
         .logo {
-            width: 100px;
-            margin-bottom: 1rem;
+            width: 120px;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
         }
 
-        /* Feature Cards */
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
         .feature-card {
-            background: white;
+            background: var(--card-bg);
             border-radius: 16px;
             padding: 2rem;
-            margin: 2rem 0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease;
         }
 
-        .feature-mockup {
-            background: #f8f9fa;
-            border-radius: 8px;
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Mockup Elements */
+        .mockup {
+            background: var(--background);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .vault-interface {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .vault-input {
             padding: 1rem;
-            margin: 1rem 0;
-            min-height: 300px;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        /* News Slider */
+        .news-slider {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1rem 0;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+        }
+
+        .news-card {
+            flex: 0 0 85%;
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            scroll-snap-align: start;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
         /* Technical Specs */
         .spec-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            gap: 1.5rem;
             margin: 2rem 0;
         }
 
         .spec-item {
             padding: 1.5rem;
-            background: white;
+            background: rgba(42, 92, 130, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        /* Roadmap */
+        .roadmap {
+            display: grid;
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .roadmap-phase {
+            padding: 2rem;
+            background: var(--card-bg);
             border-radius: 12px;
+            position: relative;
         }
 
-        /* Interactive Elements */
-        .vault-demo {
-            border: 2px dashed var(--primary);
-            padding: 1rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
+        .roadmap-phase::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
         }
 
-        .vault-demo:hover {
-            background: rgba(94, 129, 172, 0.1);
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeIn 0.6s ease forwards;
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <svg class="logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="45" fill="none" stroke="white" stroke-width="3"/>
-                <path d="M30,40 Q50,20 70,40 L50,80 Z" fill="white"/>
-            </svg>
-            <h1>The Future of Private Self-Care</h1>
-            <p>Journaling reimagined for the AI era</p>
+            <img src="logo.svg" alt="SoulBoard" class="logo">
+            <h1>Your Private Digital Sanctuary</h1>
+            <p>Journaling reimagined for the modern mind</p>
         </div>
     </section>
 
-    <!-- Core Features -->
-    <div class="container">
-        <!-- Memory Vault -->
-        <div class="feature-card">
-            <h2>Military-Grade Memory Vault</h2>
-            <div class="feature-mockup">
-                <div class="vault-demo" onclick="demoVault()">
-                    <p>🔒 Try 3-Word Encryption</p>
-                    <div id="vaultOutput"></div>
+    <main class="container">
+        <!-- Core Features -->
+        <section class="feature-grid">
+            <div class="feature-card animate">
+                <h2>🛡️ Military-Grade Vault</h2>
+                <div class="mockup">
+                    <div class="vault-interface">
+                        <input type="text" class="vault-input" 
+                               placeholder="sunshine-moonlight-serendipity"
+                               pattern="\w{3,20}-\w{3,20}-\w{3,20}">
+                        <div class="spec-grid">
+                            <div class="spec-item">
+                                <h4>3-Word Encryption</h4>
+                                <p>Patent-pending security system</p>
+                            </div>
+                            <div class="spec-item">
+                                <h4>Auto-Archival</h4>
+                                <p>60-day ephemeral storage</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="spec-grid">
-                <div class="spec-item">
-                    <h3>3WP™ Encryption</h3>
-                    <p>Patented 3-word phrase security</p>
-                </div>
-                <div class="spec-item">
-                    <h3>Ephemeral Storage</h3>
-                    <p>Auto-archive after 60 days</p>
-                </div>
-            </div>
-        </div>
 
-        <!-- AI Companion -->
-        <div class="feature-card">
-            <h2>Context-Aware AI Companion</h2>
-            <div class="feature-mockup">
-                <div id="aiChat">
-                    <div class="message">User: Feeling overwhelmed</div>
-                    <div class="message">AI: Let's break this down...</div>
+            <div class="feature-card animate" style="animation-delay: 0.2s">
+                <h2>🤖 AI Companion</h2>
+                <div class="mockup">
+                    <div class="ai-toggle">
+                        <label>Enable GPT Insights</label>
+                        <div class="toggle-switch"></div>
+                    </div>
+                    <div class="spec-grid">
+                        <div class="spec-item">
+                            <h4>Smart Reminders</h4>
+                            <p>Context-aware notifications</p>
+                        </div>
+                        <div class="spec-item">
+                            <h4>Pattern Analysis</h4>
+                            <p>Mood trend detection</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Technical Specs -->
-        <div class="feature-card">
-            <h2>Technical Architecture</h2>
-            <div class="spec-grid">
-                <div class="spec-item">
-                    <h3>Local-First Design</h3>
-                    <p>Device-native storage</p>
-                </div>
-                <div class="spec-item">
-                    <h3>Hybrid AI</h3>
-                    <p>70% on-device processing</p>
+        <!-- Ecosystem Integration -->
+        <section class="feature-card animate" style="animation-delay: 0.4s">
+            <h2>🔗 Seamless Ecosystem</h2>
+            <div class="mockup">
+                <div class="spec-grid">
+                    <div class="spec-item">
+                        <h4>📱 Device Sync</h4>
+                        <p>iCloud & Google integration</p>
+                        <div class="cloud-logos">
+                            <!-- Add SVG logos here -->
+                        </div>
+                    </div>
+                    <div class="spec-item">
+                        <h4>📸 Visual Journaling</h4>
+                        <p>Image & text integration</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>📤 Instant Sharing</h4>
+                        <p>Create beautiful snapshots</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- News Digest -->
+        <section class="feature-card animate" style="animation-delay: 0.6s">
+            <h2>📰 Mindful News Digest</h2>
+            <div class="news-slider">
+                <div class="news-card">
+                    <h4>Global Climate Update</h4>
+                    <p>Key developments in renewable energy...</p>
+                    <button>Deep Dive →</button>
+                </div>
+                <div class="news-card">
+                    <h4>Tech Innovations</h4>
+                    <p>Breakthroughs in AI ethics...</p>
+                    <button>Deep Dive →</button>
+                </div>
+            </div>
+        </section>
 
         <!-- Roadmap -->
-        <div class="feature-card">
+        <section class="roadmap">
             <h2>Development Roadmap</h2>
-            <div class="spec-grid">
-                <div class="spec-item">
-                    <h3>2024 Q3</h3>
-                    <ul>
-                        <li>Core Vault MVP</li>
-                        <li>Seed Round</li>
-                    </ul>
-                </div>
-                <div class="spec-item">
-                    <h3>2025 Q1</h3>
-                    <ul>
-                        <li>AI Companion Beta</li>
-                        <li>Series A Target</li>
-                    </ul>
-                </div>
+            <div class="roadmap-phase">
+                <h3>2024 Q3</h3>
+                <ul>
+                    <li>Core Vault System Launch</li>
+                    <li>Seed Funding Round</li>
+                    <li>Mobile MVP Release</li>
+                </ul>
             </div>
-        </div>
-    </div>
+            <div class="roadmap-phase">
+                <h3>2024 Q4</h3>
+                <ul>
+                    <li>AI Companion Beta</li>
+                    <li>Cross-Device Sync</li>
+                    <li>Enterprise Partnerships</li>
+                </ul>
+            </div>
+        </section>
+    </main>
 
     <script>
-        // Interactive Vault Demo
-        async function demoVault() {
-            const sampleText = "SoulBoard protects this message";
-            try {
-                const encrypted = await window.crypto.subtle.digest(
-                    'SHA-256',
-                    new TextEncoder().encode(sampleText)
-                );
-                const hashArray = Array.from(new Uint8Array(encrypted));
-                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-                document.getElementById('vaultOutput').innerHTML = 
-                    `<small>Encrypted:<br>${hashHex.substring(0,24)}...</small>`;
-            } catch (e) {
-                alert('Security demo requires HTTPS');
-            }
-        }
+        // Interactive elements
+        document.querySelectorAll('.news-card button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.parentElement.classList.toggle('expanded');
+            });
+        });
 
-        // Dynamic Roadmap
-        const roadmap = [
-            { date: '2024 Q3', items: ['Core Vault MVP', 'Seed Round'] },
-            { date: '2025 Q1', items: ['AI Companion Beta', 'Series A'] }
-        ];
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.feature-card, .roadmap-phase').forEach(el => {
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>
