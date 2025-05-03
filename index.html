@@ -3,192 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoulBoard | Secure Emotional Journal</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌥️</text></svg>">
+    <title>SoulBoard | The Emotional Operating System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ======== CORE APP STYLES ======== */
         :root {
-            --primary: #8B93FF;
-            --secondary: #FFA1F5;
-            --background: #FAF9F6;
-            --text: #333;
-            --investor-blue: #1A3658;
+            --neon: #00ff9d;
+            --dark: #0a0a0a;
+            --gray: #1a1a1a;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', sans-serif;
+            box-sizing: border-box;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         body {
-            background-color: var(--background);
-            color: var(--text);
+            background: var(--dark);
+            color: white;
             line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* ======== INVESTOR HEADER ======== */
-        .investor-header {
-            background: linear-gradient(135deg, var(--investor-blue), #0F2640);
-            color: white;
             padding: 2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(45deg, #000428, #004e92);
+            padding: 8rem 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .investor-header h1 {
-            font-size: 2.5rem;
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M44.3,-58.3C57,-48.6,66.3,-34.5,71.2,-17.9C76.1,-1.3,76.6,17.8,69.1,32.8C61.6,47.7,46.2,58.5,29.7,66.7C13.2,74.9,-4.4,80.5,-20.6,77.6C-36.7,74.7,-51.5,63.4,-61.8,48.8C-72.1,34.3,-78,16.4,-77.3,-0.6C-76.7,-17.6,-69.5,-35.2,-58.2,-49.4C-46.8,-63.6,-31.3,-74.4,-14.1,-80.2C3.2,-86,6.3,-86.9,44.3,-58.3Z" transform="translate(100 100)" fill="%2300ff9d" opacity="0.1"/></svg>');
+            opacity: 0.1;
+            animation: pulse 20s infinite;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #00ff9d, #00b8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .stat-card {
+            background: var(--gray);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-card h3 {
+            color: var(--neon);
             margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
 
-        .patent-badge {
-            background: #FF6B6B;
-            color: white;
-            padding: 0.3rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin: 1rem 0;
-        }
-
-        /* ======== PITCH GRID ======== */
-        .pitch-grid {
+        /* Technology Stack */
+        .tech-stack {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin: 2rem 0;
+            margin: 4rem 0;
         }
 
-        .pitch-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        /* ======== EXISTING APP STYLES ======== */
-        .app-section {
-            background: white;
+        .tech-item {
+            background: rgba(0,255,157,0.1);
             padding: 2rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-radius: 15px;
+            border: 1px solid var(--neon);
         }
 
-        /* ... (keep all your original styles) ... */
-        
-        /* ======== INVESTOR FOOTER ======== */
-        .investor-footer {
+        /* CTA Section */
+        .cta {
             text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-            border-top: 1px solid #eee;
+            padding: 6rem 0;
+            background: linear-gradient(45deg, #000428, #004e92);
+            margin: 4rem 0;
+            border-radius: 15px;
         }
 
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 3rem;
+            background: var(--neon);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
-    <!-- Investor Pitch Section -->
-    <header class="investor-header">
-        <h1>SoulBoard</h1>
-        <p class="tagline">Where your soul speaks without judgment</p>
-        <div class="patent-badge">Patent Pending #SB2024-001</div>
-        <a href="#app" class="cta-button">Try Live Prototype</a>
-    </header>
+    <nav class="container">
+        <h2 style="color: var(--neon)">SoulBoard</h2>
+    </nav>
 
-    <div class="pitch-grid">
-        <div class="pitch-card">
-            <h3>💰 Market Opportunity</h3>
-            <ul>
-                <li>▶ $26B Mental Health Tech Market</li>
-                <li>▶ 240% Journaling Growth Post-COVID</li>
-                <li>▶ Zero Competitors with Security Focus</li>
-            </ul>
+    <section class="hero">
+        <div class="container">
+            <h1>The Emotional Intelligence Layer for Web3</h1>
+            <a href="https://vincenek.github.io/Soul-Board/" class="cta-button" target="_blank">
+                Live Prototype
+                <i class="fas fa-arrow-up-right-from-square"></i>
+            </a>
         </div>
-        <div class="pitch-card">
-            <h3>🛡️ Core Technology</h3>
-            <ul>
-                <li>▶ 3-Word Memory Recovery System</li>
-                <li>▶ Military-Grade Encryption</li>
-                <li>▶ GDPR/HIPAA Compliant</li>
-            </ul>
-        </div>
-        <div class="pitch-card">
-            <h3>🚀 Growth Strategy</h3>
-            <ul>
-                <li>▶ Freemium Conversion Rate: 8%</li>
-                <li>▶ $299 LTV/CAC Ratio</li>
-                <li>▶ Enterprise API Roadmap</li>
-            </ul>
-        </div>
-    </div>
+    </section>
 
-    <!-- Core App Section -->
-    <section class="app-section" id="app">
-        <header>
-            <h1>SoulBoard</h1>
-            <p class="tagline">Your private feed • For your eyes only</p>
-        </header>
-
-        <div class="new-post">
-            <textarea placeholder="What's on your mind today?"></textarea>
-            <input type="text" class="search-bar" placeholder="Search entries... (date, mood, text)" id="searchInput">
-            <div class="mood-selector">
-                <button class="mood-btn">😊 Happy</button>
-                <button class="mood-btn">😐 Meh</button>
-                <button class="mood-btn">😢 Sad</button>
-                <button class="mood-btn">💡 Inspired</button>
-                <button class="mood-btn">🌪 Anxious</button>
-                <button class="mood-btn">😡 Angry</button>
-                <button class="mood-btn">😴 Tired</button>
-                <button class="mood-btn">🎉 Celebratory</button>
+    <section class="container">
+        <div class="stats-grid">
+            <div class="stat-card scroll-reveal">
+                <h3>$26B Market</h3>
+                <p>Mental Health Tech Valuation Growing at 12% CAGR</p>
             </div>
-            <button class="post-btn">Add to SoulBoard</button>
+            <div class="stat-card scroll-reveal">
+                <h3>240% Growth</h3>
+                <p>Digital Journaling Adoption Post-COVID</p>
+            </div>
+            <div class="stat-card scroll-reveal">
+                <h3>8% Conversion</h3>
+                <p>Freemium to Premium User Migration</p>
+            </div>
         </div>
 
-        <div id="feed">
-            <div id="empty-state">
-                ✨ Your soul's feed is empty...<br>
-                Be the first to share your thoughts!
+        <div class="tech-stack">
+            <div class="tech-item scroll-reveal">
+                <h3>Military-Grade Security</h3>
+                <p>XChaCha20 Encryption & Zero-Knowledge Architecture</p>
+            </div>
+            <div class="tech-item scroll-reveal">
+                <h3>Cognitive Recovery System</h3>
+                <p>3-Word Memory Pattern Authentication (Patent Pending)</p>
+            </div>
+        </div>
+
+        <div class="cta scroll-reveal">
+            <h2 style="margin-bottom: 2rem;">Ready for Emotional Infrastructure Revolution?</h2>
+            <div style="display: flex; gap: 2rem; justify-content: center;">
+                <a href="mailto:kenechukwu130@gmail.com" class="cta-button">
+                    Contact Founder
+                    <i class="fas fa-paper-plane"></i>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Investor Footer -->
-    <footer class="investor-footer">
-        <div class="contact-info">
-            <p>Founder: Kenechukwu Vincent </p>
-            <p>GitHub: <a href="https://github.com/vincenek">vincenek</a></p>
-            <p>Email: <a href="mailto:kenechukwu130@gmail.com">kenechukwu130@gmail.com</a></p>
-        </div>
-        <div class="cta" style="margin-top: 1rem;">
-            <a href="https://vincenek.github.io/Soul-Board/" class="cta-button" 
-               style="background: #5EBA7D; padding: 0.8rem 2rem; border-radius: 30px; color: white; text-decoration: none;">
-                Access Live Prototype
-            </a>
-        </div>
-    </footer>
-
     <script>
-        // ======== CORE APP FUNCTIONALITY ========
-        // ... (keep all your original JavaScript code) ...
+        // Scroll reveal animation
+        const scrollReveal = document.querySelectorAll('.scroll-reveal');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
 
-        // ======== INVESTOR MODE ========
-        // Add hidden vault teaser
-        const vaultTeaser = document.createElement('div');
-        vaultTeaser.innerHTML = `
-            <div style="text-align: center; margin: 2rem 0; padding: 1rem; background: var(--background); border-radius: 12px;">
-                <h3>Coming Soon: Emotional Vault</h3>
-                <p>3-word security system currently in development</p>
-            </div>
-        `;
-        document.getElementById('feed').appendChild(vaultTeaser);
+        scrollReveal.forEach((element) => observer.observe(element));
     </script>
 </body>
-</html> 
+</html>
