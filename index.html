@@ -3,241 +3,459 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoulBoard | Secure Emotional Intelligence Platform</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>SoulBoard Pro | Mental Wellness Journal</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
     <style>
         :root {
             --primary: #2A9D8F;
             --secondary: #E9C46A;
-            --dark: #0F172A;
-            --light: #F8FAFC;
-            --gray: #64748B;
+            --background: #F4F9F7;
+            --text: #264653;
+            --border: #C4D8D2;
+            --accent: #83C5BE;
+            --error: #E76F51;
         }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', system-ui, sans-serif;
         }
 
         body {
-            background: var(--dark);
-            color: var(--light);
+            background: linear-gradient(160deg, #F4F9F7 0%, #E9F5F1 100%);
+            color: var(--text);
             line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
+            max-width: 680px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2rem 1rem;
+            min-height: 100vh;
         }
 
-        /* Navigation */
-        .nav {
-            padding: 2rem 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.8s ease-out;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 3.2rem;
+            margin-bottom: 0.5rem;
             color: var(--primary);
         }
 
-        /* Hero Section */
-        .hero {
-            padding: 8rem 0;
-            text-align: center;
+        .tagline {
+            color: #5C8374;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
+        .journal-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(42, 157, 143, 0.08);
+            padding: 2rem;
             margin-bottom: 2rem;
-            line-height: 1.2;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            backdrop-filter: blur(4px);
         }
 
-        /* Stats Grid */
-        .stats-grid {
+        .editor textarea {
+            width: 100%;
+            padding: 1.2rem;
+            border: 2px solid var(--border);
+            border-radius: 0.8rem;
+            min-height: 140px;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            resize: vertical;
+            transition: all 0.2s ease;
+            background: rgba(244, 249, 247, 0.8);
+        }
+
+        .editor textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.1);
+        }
+
+        .mood-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
         }
 
-        .stat-card {
-            background: rgba(255,255,255,0.05);
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .stat-card h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        /* Technology Stack */
-        .tech-stack {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
-        }
-
-        .tech-item {
-            background: rgba(42,157,143,0.1);
-            padding: 2rem;
-            border-radius: 16px;
-            border-left: 4px solid var(--primary);
-        }
-
-        /* Founder Section */
-        .founder {
-            text-align: center;
-            padding: 4rem 0;
-            background: rgba(255,255,255,0.03);
-            border-radius: 16px;
-            margin: 4rem 0;
-        }
-
-        /* CTA Section */
-        .cta {
-            text-align: center;
-            padding: 4rem 0;
-        }
-
-        .button {
-            display: inline-flex;
+        .mood-btn {
+            padding: 0.6rem;
+            border: 2px solid var(--border);
+            border-radius: 0.6rem;
+            background: rgba(244, 249, 247, 0.8);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 1rem 2rem;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .mood-btn.active {
             background: var(--primary);
             color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            border-color: var(--primary);
         }
 
-        .button:hover {
+        .post-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, #34A798 100%);
+            color: white;
+            border: none;
+            border-radius: 0.6rem;
+            padding: 1rem 2rem;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .post-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .search-container {
+            margin: 1.5rem 0;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            border: 2px solid var(--border);
+            border-radius: 0.6rem;
+            font-size: 1rem;
+            background: rgba(244, 249, 247, 0.8);
+            transition: all 0.2s ease;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.1);
+        }
+
+        .posts-feed {
+            margin-top: 1rem;
+        }
+
+        .post-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 0.8rem;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 2px 12px rgba(42, 157, 143, 0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .post-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(42,157,143,0.3);
         }
 
-        /* Animations */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
         }
 
-        .scroll-reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        .post-date {
+            color: #5C8374;
+            font-size: 0.85rem;
+            font-weight: 500;
         }
 
-        footer {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding: 2rem 0;
+        .post-mood {
+            font-size: 1.4rem;
+        }
+
+        .post-content {
+            white-space: pre-wrap;
+            line-height: 1.5;
+            margin: 1rem 0;
+            color: #2D3E40;
+        }
+
+        .highlight {
+            background-color: rgba(233, 196, 106, 0.3);
+            padding: 0.1em 0.3em;
+            border-radius: 0.3em;
+        }
+
+        .empty-state {
             text-align: center;
-            color: var(--gray);
+            padding: 3rem;
+            color: #83A69B;
+            font-style: italic;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .journal-container {
+                padding: 1.5rem;
+            }
+            
+            .mood-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
 <body>
-    <nav class="nav container">
-        <div class="logo">SoulBoard</div>
-        <div class="links">
-            <a href="#contact" class="button">Contact</a>
-        </div>
-    </nav>
+    <header class="header">
+        <div class="logo">🌿</div>
+        <h1 class="tagline">Mindful Nature Journal</h1>
+    </header>
 
-    <section class="hero container">
-        <h1 class="scroll-reveal">The Secure Emotional Intelligence Platform</h1>
-        <p class="scroll-reveal" style="color: var(--gray); max-width: 800px; margin: 0 auto 2rem;">
-            Military-grade encrypted journaling meets AI-powered emotional analytics
-        </p>
-        <a href="https://vincenek.github.io/Soul-Board/" class="button scroll-reveal" target="_blank">
-            Live Prototype
-            <i class="fas fa-external-link-alt"></i>
-        </a>
-    </section>
+    <main class="journal-container">
+        <section class="editor">
+            <textarea 
+                placeholder="What's growing in your mind today?"
+                aria-label="Journal entry content"></textarea>
+            
+            <div class="mood-grid">
+                <button class="mood-btn" data-mood="🌻 Happy">🌻 Happy</button>
+                <button class="mood-btn" data-mood="🍃 Calm">🍃 Calm</button>
+                <button class="mood-btn" data-mood="🌧️ Reflective">🌧️ Reflective</button>
+                <button class="mood-btn" data-mood="💡 Inspired">💡 Inspired</button>
+                <button class="mood-btn" data-mood="🌊 Flow">🌊 Flow</button>
+                <button class="mood-btn" data-mood="🔥 Passionate">🔥 Passionate</button>
+                <button class="mood-btn" data-mood="🌙 Restful">🌙 Restful</button>
+                <button class="mood-btn" data-mood="🎉 Celebratory">🎉 Celebratory</button>
+            </div>
 
-    <section class="container">
-        <div class="stats-grid">
-            <div class="stat-card scroll-reveal">
-                <h3>$26B Market</h3>
-                <p>Mental Health Tech Valuation (12% CAGR)</p>
-            </div>
-            <div class="stat-card scroll-reveal">
-                <h3>240% Growth</h3>
-                <p>Post-COVID Digital Journaling Adoption</p>
-            </div>
-            <div class="stat-card scroll-reveal">
-                <h3>8% Conversion</h3>
-                <p>Freemium to Premium Migration Rate</p>
-            </div>
-        </div>
+            <button class="post-btn" aria-label="Create new post">Plant This Thought</button>
 
-        <div class="tech-stack">
-            <div class="tech-item scroll-reveal">
-                <h3>Military-Grade Security</h3>
-                <p>XChaCha20 Encryption & Zero-Knowledge Architecture</p>
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    class="search-bar" 
+                    placeholder="Search your garden of thoughts..." 
+                    id="searchInput"
+                    aria-label="Search entries">
             </div>
-            <div class="tech-item scroll-reveal">
-                <h3>Cognitive Recovery System</h3>
-                <p>3-Word Memory Pattern Authentication (Patent Pending)</p>
-            </div>
-        </div>
+        </section>
 
-        <div class="founder scroll-reveal">
-            <h2>Founder</h2>
-            <h3 style="margin: 1rem 0; color: var(--primary);">Kenechukwu Vincent</h3>
-            <div style="margin: 1rem 0;">
-                <a href="https://github.com/vincenek" class="button" target="_blank">
-                    <i class="fab fa-github"></i>
-                    GitHub
-                </a>
+        <section class="posts-feed" id="postsFeed">
+            <div class="empty-state" id="emptyState">
+                Your mental garden is empty... Plant your first thought seed
             </div>
-            <p style="color: var(--gray);">
-                <a href="mailto:kenechukwu130@gmail.com" style="color: var(--primary); text-decoration: none;">
-                    kenechukwu130@gmail.com
-                </a>
-            </p>
-        </div>
-    </section>
-
-    <footer class="container">
-        <p>SoulBoard © 2025 | The Emotional Intelligence Layer for Web3</p>
-    </footer>
+        </section>
+    </main>
 
     <script>
-        // Scroll reveal animation
-        const scrollReveal = document.querySelectorAll('.scroll-reveal');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
+        class NatureJournal {
+            constructor() {
+                this.STORAGE_KEY = 'natureJournalV2';
+                this.entries = this.loadEntries();
+                this.init();
+            }
 
-        scrollReveal.forEach((element) => observer.observe(element));
+            init() {
+                this.bindEvents();
+                this.renderPosts();
+                this.setupSearch();
+                this.addServiceWorker();
+            }
+
+            loadEntries() {
+                try {
+                    const entries = JSON.parse(localStorage.getItem(this.STORAGE_KEY)) || [];
+                    return entries.sort((a, b) => b.id - a.id);
+                } catch (error) {
+                    console.error('Load error:', error);
+                    return [];
+                }
+            }
+
+            saveEntries() {
+                try {
+                    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.entries));
+                } catch (error) {
+                    console.error('Save error:', error);
+                    this.showError('Storage full! Please clear some space.');
+                }
+            }
+
+            bindEvents() {
+                document.querySelector('.post-btn').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.createPost();
+                });
+                
+                document.querySelectorAll('.mood-btn').forEach(btn => 
+                    btn.addEventListener('click', () => this.toggleMood(btn)));
+            }
+
+            toggleMood(btn) {
+                document.querySelectorAll('.mood-btn').forEach(b => 
+                    b.classList.remove('active'));
+                btn.classList.add('active');
+            }
+
+            createPost() {
+                const text = document.querySelector('textarea').value.trim();
+                const mood = document.querySelector('.mood-btn.active')?.dataset.mood || '🌱 Neutral';
+                
+                if (!text) {
+                    this.showError('Please write something before posting!');
+                    return;
+                }
+
+                const newEntry = {
+                    id: Date.now(),
+                    text,
+                    mood,
+                    date: new Date().toISOString(),
+                    timestamp: Date.now()
+                };
+
+                this.entries = [newEntry, ...this.entries];
+                this.saveEntries();
+                this.renderPosts();
+                this.resetForm();
+            }
+
+            setupSearch() {
+                const searchInput = document.getElementById('searchInput');
+                let timeout;
+                
+                searchInput.addEventListener('input', (e) => {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => {
+                        this.filterPosts(e.target.value);
+                    }, 300);
+                });
+            }
+
+            filterPosts(query) {
+                const normalizedQuery = query.toLowerCase().trim();
+                const filtered = this.entries.filter(entry => {
+                    const entryDate = new Date(entry.date).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric'
+                    }).toLowerCase();
+                    
+                    return (
+                        entry.text.toLowerCase().includes(normalizedQuery) ||
+                        entry.mood.toLowerCase().includes(normalizedQuery) ||
+                        entryDate.includes(normalizedQuery)
+                    );
+                });
+                this.renderPosts(filtered, normalizedQuery);
+            }
+
+            renderPosts(entries = this.entries, searchTerm = '') {
+                const feed = document.getElementById('postsFeed');
+                const emptyState = document.getElementById('emptyState');
+                
+                feed.innerHTML = '';
+                emptyState.style.display = entries.length ? 'none' : 'block';
+
+                entries.forEach(entry => {
+                    const post = document.createElement('div');
+                    post.className = 'post-card';
+                    
+                    const highlightedContent = this.highlightMatches(entry.text, searchTerm);
+                    const formattedDate = new Date(entry.date).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric'
+                    });
+
+                    post.innerHTML = `
+                        <div class="post-meta">
+                            <div class="post-date">${formattedDate}</div>
+                            <div class="post-mood">${entry.mood}</div>
+                        </div>
+                        <div class="post-content">${highlightedContent}</div>
+                    `;
+                    feed.appendChild(post);
+                });
+            }
+
+            highlightMatches(text, searchTerm) {
+                if (!searchTerm) return text;
+                const regex = new RegExp(`(${this.escapeRegExp(searchTerm)})`, 'gi');
+                return text.replace(regex, '<span class="highlight">$1</span>');
+            }
+
+            escapeRegExp(string) {
+                return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }
+
+            resetForm() {
+                document.querySelector('textarea').value = '';
+                document.querySelectorAll('.mood-btn').forEach(btn => 
+                    btn.classList.remove('active'));
+                document.querySelector('textarea').focus();
+            }
+
+            showError(message) {
+                const errorEl = document.createElement('div');
+                errorEl.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: var(--error);
+                    color: white;
+                    padding: 1rem 2rem;
+                    border-radius: 0.5rem;
+                    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                    z-index: 1000;
+                `;
+                errorEl.textContent = message;
+                document.body.appendChild(errorEl);
+                
+                setTimeout(() => {
+                    errorEl.remove();
+                }, 3000);
+            }
+
+            addServiceWorker() {
+                if ('serviceWorker' in navigator) {
+                    window.addEventListener('load', () => {
+                        navigator.serviceWorker.register('/sw.js')
+                            .catch(err => console.log('ServiceWorker registration failed:', err));
+                    });
+                }
+            }
+        }
+
+        // Initialize journal
+        try {
+            const journal = new NatureJournal();
+        } catch (error) {
+            console.error('Bootstrap Error:', error);
+            document.body.innerHTML = `
+                <div style="
+                    padding: 2rem;
+                    text-align: center;
+                    color: var(--error);
+                ">
+                    <h1>Critical Error</h1>
+                    <p>Please clear browser data and refresh</p>
+                </div>
+            `;
+        }
     </script>
 </body>
 </html>
