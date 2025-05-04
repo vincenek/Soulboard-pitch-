@@ -261,6 +261,7 @@
             constructor() {
                 this.STORAGE_KEY = 'natureJournalV2';
                 this.entries = this.loadEntries();
+                this.currentSearch = '';
                 this.init();
             }
 
@@ -325,6 +326,8 @@
 
                 this.entries = [newEntry, ...this.entries];
                 this.saveEntries();
+                
+                this.currentSearch = '';
                 document.getElementById('searchInput').value = '';
                 this.renderPosts();
                 this.resetForm();
@@ -332,36 +335,34 @@
 
             setupSearch() {
                 const searchInput = document.getElementById('searchInput');
-                let timeout;
-                
                 searchInput.addEventListener('input', (e) => {
-                    clearTimeout(timeout);
-                    timeout = setTimeout(() => {
-                        this.filterPosts(e.target.value);
-                    }, 300);
+                    this.filterPosts(e.target.value);
                 });
             }
 
             filterPosts(query) {
-                const normalizedQuery = query.toLowerCase().trim();
+                this.currentSearch = query.toLowerCase().trim();
                 const filtered = this.entries.filter(entry => {
-                    const entryDate = new Date(entry.date).toLocaleDateString('en-US', {
+                    const isoDate = new Date(entry.date).toISOString().toLowerCase();
+                    const localDate = new Date(entry.date).toLocaleDateString('en-US', {
                         month: 'short',
                         day: 'numeric',
                         year: 'numeric'
                     }).toLowerCase();
-                    
-                    return (
-                        entry.text.toLowerCase().includes(normalizedQuery) ||
-                        entry.mood.toLowerCase().includes(normalizedQuery) ||
-                        entryDate.includes(normalizedQuery) ||
-                        entry.date.toLowerCase().includes(normalizedQuery)
-                    );
+
+                    return [
+                        entry.text.toLowerCase(),
+                        entry.mood.toLowerCase(),
+                        isoDate,
+                        localDate,
+                        entry.date.toLowerCase()
+                    ].some(text => text.includes(this.currentSearch));
                 });
-                this.renderPosts(filtered, normalizedQuery);
+                
+                this.renderPosts(filtered);
             }
 
-            renderPosts(entries = this.entries, searchTerm = '') {
+            renderPosts(entries = this.entries) {
                 const feed = document.getElementById('postsFeed');
                 const emptyState = document.getElementById('emptyState');
                 
@@ -372,7 +373,6 @@
                     const post = document.createElement('div');
                     post.className = 'post-card';
                     
-                    const highlightedContent = this.highlightMatches(entry.text, searchTerm);
                     const formattedDate = new Date(entry.date).toLocaleDateString('en-US', {
                         month: 'short',
                         day: 'numeric',
@@ -381,19 +381,21 @@
 
                     post.innerHTML = `
                         <div class="post-meta">
-                            <div class="post-date">${this.highlightMatches(formattedDate, searchTerm)}</div>
-                            <div class="post-mood">${this.highlightMatches(entry.mood, searchTerm)}</div>
+                            <div class="post-date">${this.highlightMatches(formattedDate)}</div>
+                            <div class="post-mood">${this.highlightMatches(entry.mood)}</div>
                         </div>
-                        <div class="post-content">${highlightedContent}</div>
+                        <div class="post-content">${this.highlightMatches(entry.text)}</div>
                     `;
                     feed.appendChild(post);
                 });
             }
 
-            highlightMatches(text, searchTerm) {
-                if (!searchTerm) return text;
-                const regex = new RegExp(`(${this.escapeRegExp(searchTerm)})`, 'gi');
-                return text.replace(regex, '<span class="highlight">$1</span>');
+            highlightMatches(text) {
+                if (!this.currentSearch) return text;
+                const regex = new RegExp(`(${this.escapeRegExp(this.currentSearch)})`, 'gi');
+                return text.replace(regex, (match) => 
+                    `<span class="highlight">${match}</span>`
+                );
             }
 
             escapeRegExp(string) {
