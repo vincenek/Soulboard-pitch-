@@ -225,9 +225,7 @@
 
     <main class="journal-container">
         <section class="editor">
-            <textarea 
-                placeholder="What's growing in your mind today?"
-                aria-label="Journal entry content"></textarea>
+            <textarea aria-label="Journal entry content"></textarea>
             
             <div class="mood-grid">
                 <button class="mood-btn" data-mood="🌻 Happy">🌻 Happy</button>
@@ -246,7 +244,6 @@
                 <input 
                     type="text" 
                     class="search-bar" 
-                    placeholder="Search your garden of thoughts..." 
                     id="searchInput"
                     aria-label="Search entries">
             </div>
@@ -328,6 +325,7 @@
 
                 this.entries = [newEntry, ...this.entries];
                 this.saveEntries();
+                document.getElementById('searchInput').value = '';
                 this.renderPosts();
                 this.resetForm();
             }
@@ -356,7 +354,8 @@
                     return (
                         entry.text.toLowerCase().includes(normalizedQuery) ||
                         entry.mood.toLowerCase().includes(normalizedQuery) ||
-                        entryDate.includes(normalizedQuery)
+                        entryDate.includes(normalizedQuery) ||
+                        entry.date.toLowerCase().includes(normalizedQuery)
                     );
                 });
                 this.renderPosts(filtered, normalizedQuery);
@@ -382,8 +381,8 @@
 
                     post.innerHTML = `
                         <div class="post-meta">
-                            <div class="post-date">${formattedDate}</div>
-                            <div class="post-mood">${entry.mood}</div>
+                            <div class="post-date">${this.highlightMatches(formattedDate, searchTerm)}</div>
+                            <div class="post-mood">${this.highlightMatches(entry.mood, searchTerm)}</div>
                         </div>
                         <div class="post-content">${highlightedContent}</div>
                     `;
@@ -440,7 +439,6 @@
             }
         }
 
-        // Initialize journal
         try {
             const journal = new NatureJournal();
         } catch (error) {
